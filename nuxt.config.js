@@ -1,5 +1,9 @@
 
 module.exports = {
+  server: {
+    port: 9911, // default: 3000
+    host: '127.0.0.1' // default: localhost,
+  },
   mode: 'universal',
   /*
   ** Headers of the page
@@ -24,6 +28,9 @@ module.exports = {
   */
   css: [
     // 'element-ui/lib/theme-chalk/index.css'
+    '@/assets/css/normalize.css',
+    '@/assets/less/public.less',
+    '@/assets/less/main.less',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -40,7 +47,17 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:9910',
+    }
+  },
   /*
   ** Build configuration
   */
