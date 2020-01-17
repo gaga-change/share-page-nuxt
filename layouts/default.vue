@@ -16,21 +16,21 @@
         <v-footer />
       </el-footer>
     </el-container>
-    <el-backtop></el-backtop>
+    <el-backtop />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Aside from "@/components/Aside";
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import Aside from '@/components/Aside'
 export default {
   components: {
-    "v-header": Header,
-    "v-footer": Footer,
-    "v-aside": Aside
+    'v-header': Header,
+    'v-footer': Footer,
+    'v-aside': Aside
   }
-};
+}
 </script>
 
 <style lang="less">

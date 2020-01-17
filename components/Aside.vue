@@ -15,11 +15,11 @@
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
   computed: {
   }
-};
+}
 </script>
 
 <style lang="less">
