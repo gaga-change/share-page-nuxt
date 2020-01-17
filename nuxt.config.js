@@ -29,34 +29,32 @@ module.exports = {
   css: [
     // 'element-ui/lib/theme-chalk/index.css'
     '@/assets/css/normalize.css',
+    '@/assets/css/bootstrap-grid.css',
     '@/assets/less/public.less',
-    '@/assets/less/main.less',
+    '@/assets/less/main.less'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/axios'
   ],
-  axios: {
-    proxy: true
-  },
-  proxy: {
-    '/api': {
-      target: 'http://localhost:9910',
-    }
+  router: {
+    middleware: ['user']
   },
   /*
   ** Build configuration
@@ -66,10 +64,10 @@ module.exports = {
     babel: {
       plugins: [
         [
-          "component",
+          'component',
           {
-            "libraryName": "element-ui",
-            "styleLibraryName": "theme-chalk"
+            'libraryName': 'element-ui',
+            'styleLibraryName': 'theme-chalk'
           }
         ]
       ]
@@ -78,7 +76,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }

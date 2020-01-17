@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import locale from 'element-ui/lib/locale/lang/zh-CN'
-Vue.prototype.$ELEMENT = { size: 'small', locale };
 import {
   // Pagination,
   // Dialog,
@@ -12,7 +11,7 @@ import {
   Submenu,
   MenuItem,
   // MenuItemGroup,
-  // Input,
+  Input,
   // InputNumber,
   // Radio,
   // RadioGroup,
@@ -35,8 +34,8 @@ import {
   // Tooltip,
   // Breadcrumb,
   // BreadcrumbItem,
-  // Form,
-  // FormItem,
+  Form,
+  FormItem,
   // Tabs,
   // TabPane,
   // Tag,
@@ -68,7 +67,7 @@ import {
   Footer,
   // Timeline,
   // TimelineItem,
-  // Link,
+  Link,
   // Divider,
   // Image,
   // Calendar,
@@ -77,9 +76,10 @@ import {
   // CascaderPanel,
   // Loading,
   // MessageBox,
-  // Message,
+  Message
   // Notification
-} from 'element-ui';
+} from 'element-ui'
+Vue.prototype.$ELEMENT = { size: 'small', locale }
 
 // Vue.use(Pagination);
 // Vue.use(Dialog);
@@ -87,11 +87,11 @@ import {
 // Vue.use(Dropdown);
 // Vue.use(DropdownMenu);
 // Vue.use(DropdownItem);
-Vue.use(Menu);
-Vue.use(Submenu);
-Vue.use(MenuItem);
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
 // Vue.use(MenuItemGroup);
-// Vue.use(Input);
+Vue.use(Input)
 // Vue.use(InputNumber);
 // Vue.use(Radio);
 // Vue.use(RadioGroup);
@@ -103,7 +103,7 @@ Vue.use(MenuItem);
 // Vue.use(Select);
 // Vue.use(Option);
 // Vue.use(OptionGroup);
-Vue.use(Button);
+Vue.use(Button)
 // Vue.use(ButtonGroup);
 // Vue.use(Table);
 // Vue.use(TableColumn);
@@ -114,22 +114,22 @@ Vue.use(Button);
 // Vue.use(Tooltip);
 // Vue.use(Breadcrumb);
 // Vue.use(BreadcrumbItem);
-// Vue.use(Form);
-// Vue.use(FormItem);
+Vue.use(Form)
+Vue.use(FormItem)
 // Vue.use(Tabs);
 // Vue.use(TabPane);
 // Vue.use(Tag);
 // Vue.use(Tree);
 // Vue.use(Alert);
 // Vue.use(Slider);
-Vue.use(Icon);
-Vue.use(Row);
-Vue.use(Col);
+Vue.use(Icon)
+Vue.use(Row)
+Vue.use(Col)
 // Vue.use(Upload);
 // Vue.use(Progress);
 // Vue.use(Spinner);
 // Vue.use(Badge);
-Vue.use(Card);
+Vue.use(Card)
 // Vue.use(Rate);
 // Vue.use(Steps);
 // Vue.use(Step);
@@ -140,18 +140,18 @@ Vue.use(Card);
 // Vue.use(Cascader);
 // Vue.use(ColorPicker);
 // Vue.use(Transfer);
-Vue.use(Container);
-Vue.use(Header);
-Vue.use(Aside);
-Vue.use(Main);
-Vue.use(Footer);
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Footer)
 // Vue.use(Timeline);
 // Vue.use(TimelineItem);
-// Vue.use(Link);
+Vue.use(Link)
 // Vue.use(Divider);
 // Vue.use(Image);
 // Vue.use(Calendar);
-Vue.use(Backtop);
+Vue.use(Backtop)
 // Vue.use(PageHeader);
 // Vue.use(CascaderPanel);
 
@@ -163,4 +163,4 @@ Vue.use(Backtop);
 // Vue.prototype.$confirm = MessageBox.confirm;
 // Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
-// Vue.prototype.$message = Message;
+Vue.prototype.$message = Message
