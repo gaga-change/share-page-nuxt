@@ -14,7 +14,10 @@ export default function({ $axios, redirect }) {
     if (code === 401) {
       redirect('/auth/login')
     } else {
-      Message.error(error.response.data)
+      Message.error({
+        showClose: true,
+        message: error.response.data
+      })
     }
   })
 }
