@@ -37,9 +37,9 @@ const model = [
     timestamps: true,
     apiConfig: {
       // private: true,
-      defaultIndexSelect: '-author -classify',
+      defaultIndexSelect: '-classify',
       defaultIndexSort: { '_id': -1 },
-      // defaultIndexPopulates: ['bill'],
+      defaultIndexPopulates: ['author'],
 
       defaultShowSelect: '-author'
       // defaultShowPopulates: ['bill'],

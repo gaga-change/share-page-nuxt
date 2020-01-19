@@ -83,9 +83,9 @@ export default {
   },
   data() {
     return {
-      // visible: false,
+      visible: false,
       classifies: [],
-      visible: true,
+      // visible: true,
       formLabelWidth: '120px',
       form: {
         content: '',
@@ -143,6 +143,9 @@ export default {
             this.submitLoading = false
           })
           this.$message.success('添加成功！')
+          this.dynamicTags = []
+          this.$refs.form.resetFields()
+          this.visible = false
         }
       })
     },
