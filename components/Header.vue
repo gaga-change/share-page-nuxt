@@ -23,6 +23,7 @@
     </ul>
     <div class="author">
       <template v-if="user">
+        <i @click="handleShark" class="shark-link el-icon-plus mr15" />
         <el-dropdown @command="handleCommand">
           <div class="avatar-area">
             <span class="nickname mr10">{{ user.nickname }}</span>
@@ -47,19 +48,24 @@
         </router-link>
       </template>
     </div>
+    <SharkForm :show.sync="sharkFormShow" />
   </nav>
 </template>
 <script>
 import Logo from '@/components/Logo'
+import SharkForm from '@/components/SharkForm'
 export default {
-  components: { Logo },
+  components: { Logo, SharkForm },
   data() {
     return {
-      activeIndex: undefined
+      activeIndex: undefined,
+      sharkFormShow: false
     }
   },
   computed: {
-    user() { return this.$store.state.user }
+    user() {
+      return this.$store.state.user
+    }
   },
   methods: {
     /** 下拉选项点击事件 */
@@ -75,6 +81,10 @@ export default {
       this.$store.commit('setUser', null)
       this.$axios.post('/api/auth/logout')
       this.$router.push('/auth/login')
+    },
+    /** 分享 按钮点击 */
+    handleShark() {
+      this.sharkFormShow = true
     }
   }
 }
@@ -127,6 +137,13 @@ export default {
   }
 
   .author {
+    display: flex;
+    height: @header_height;
+    align-items: center;
+    .shark-link {
+      font-size: 18px;
+      cursor: pointer;
+    }
     .avatar-area {
       display: flex;
       height: @header_height;

@@ -15,11 +15,11 @@ const plugin = {
 
 const model = [
   {
-    name: 'Bill',
-    dbName: 'test_bill',
-    apiName: 'bills',
+    name: 'Classify',
+    dbName: 'shark_git_classify',
+    apiName: 'classifies',
     apiConfig: {
-      private: true,
+      // private: true,
       defaultIndexSelect: '-author',
       defaultIndexSort: { '_id': -1 },
       delete: ['destroy']
@@ -31,13 +31,13 @@ const model = [
     }
   },
   {
-    name: 'Task',
-    dbName: 'test_task',
-    apiName: 'tasks',
+    name: 'Post',
+    dbName: 'shark_git_post',
+    apiName: 'posts',
     timestamps: true,
     apiConfig: {
-      private: true,
-      defaultIndexSelect: '-author -bill',
+      // private: true,
+      defaultIndexSelect: '-author -classify',
       defaultIndexSort: { '_id': -1 },
       // defaultIndexPopulates: ['bill'],
 
@@ -46,12 +46,10 @@ const model = [
     },
 
     schema: {
-      bill: { type: mongoose.Schema.Types.ObjectId, ref: 'Bill', checkExist: true }, // 关联清单
-      name: { default: '', type: String, trim: true, maxlength: 100 }, // 任务名称
-      content: { default: '', type: String, maxlength: 1000 }, // 主内容
-      close: { default: false, type: Boolean }, // 是否关闭
-      closeAt: { type: Date }, // 关闭时间
-      delete: { default: false, type: Boolean } // 是否删除
+      classify: { type: mongoose.Schema.Types.ObjectId, ref: 'Classify', checkExist: true }, // 关联分类
+      content: { default: '', type: String, trim: true, maxlength: 200 }, // 主内容
+      describe: { default: '', type: String, trim: true, maxlength: 400 }, // 描述
+      tags: [{ type: String, trim: true, maxlength: 10 }] // 标签
     }
   }
 ]
@@ -69,14 +67,14 @@ const config = {
 }
 
 const app = api(config, (router, models) => {
-  const { Bill, Task } = models
-  router.delete('/api/bills/:id/removeTask', async(ctx) => {
+  const { Classify, Post } = models
+  router.delete('/api/classifies/:id/andRemovePost', async(ctx) => {
     const { user } = ctx.session
     const { id } = ctx.params
     ctx.assert(user, 401, '未登录')
-    const temp = await Bill.deleteOne({ _id: id, author: ctx.session.user._id })
+    const temp = await Classify.deleteOne({ _id: id, author: ctx.session.user._id })
+    await Post.deleteMany({ classify: id })
     ctx.assert(temp.deletedCount === 1, 404, '资源不存在')
-    await Task.deleteMany({ bill: id })
     ctx.body = null
   })
 }, { getKoaApp: true })
