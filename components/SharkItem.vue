@@ -1,6 +1,6 @@
 <template>
-  <el-card shadow="hover">
-    <p><img :src="icon" alt=""> {{ path }}</p>
+  <el-card :class="className" shadow="hover">
+    <p><img :src="icon" width="32" height="32" alt=""> {{ path }}</p>
     <p>{{ post.describe }}</p>
     <p>{{ post.author.nickname }} 分享于 {{ post.createdAt | time }}</p>
     <p>
@@ -19,6 +19,10 @@ export default {
     }
   },
   props: {
+    className: {
+      type: String,
+      default: ''
+    },
     post: {
       type: Object,
       default: () => {}
