@@ -123,6 +123,11 @@ export default {
       if (!val) {
         this.$emit('update:show', false)
       }
+    },
+    user(val) {
+      if (val) {
+        this.initClasify()
+      }
     }
   },
   created() {
@@ -131,6 +136,8 @@ export default {
   methods: {
     /** 初始化分类 */
     async initClasify() {
+      if (!this.user) { return }
+      this.classifies = []
       const { list: classifies } = await this.$axios.$get(`/api/classifies?author=${this.user._id}`)
       this.classifies = classifies
     },
