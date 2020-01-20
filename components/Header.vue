@@ -27,7 +27,7 @@
         <el-dropdown @command="handleCommand">
           <div class="avatar-area">
             <span class="nickname mr10">{{ user.nickname }}</span>
-            <el-avatar> {{ user.nickname }} </el-avatar>
+            <el-avatar :src="user.avatar" />
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item disabled>
@@ -40,6 +40,7 @@
         </el-dropdown>
       </template>
       <template v-else>
+        <a href="https://graph.qq.com/oauth2.0/show?which=Login&display=pc&client_id=101844921&response_type=token&redirect_uri=https%3A%2F%2Fgit.share.yanjd.top%2Fauth%2Fqq">qq登录</a>
         <router-link to="/auth/login">
           登录
         </router-link>

@@ -1,7 +1,14 @@
 const api = require('gaga-api')
+const axios = require('axios')
 const mongoose = require('mongoose')
+const prefix = 'share_git_'
 const user = {
-
+  dbName: 'gaga_test_user',
+  schema: {
+    openid: { type: String },
+    unionid: { type: String }
+  },
+  timestamps: true // 默认true
 }
 
 const plugin = {
@@ -16,7 +23,7 @@ const plugin = {
 const model = [
   {
     name: 'Classify',
-    dbName: 'shark_git_classify',
+    dbName: prefix + 'classify',
     apiName: 'classifies',
     apiConfig: {
       // private: true,
@@ -32,7 +39,7 @@ const model = [
   },
   {
     name: 'Post',
-    dbName: 'shark_git_post',
+    dbName: prefix + 'post',
     apiName: 'posts',
     timestamps: true,
     apiConfig: {
@@ -67,7 +74,7 @@ const config = {
 }
 
 const app = api(config, (router, models) => {
-  const { Classify, Post } = models
+  const { Classify, Post, User } = models
   router.delete('/api/classifies/:id/andRemovePost', async(ctx) => {
     const { user } = ctx.session
     const { id } = ctx.params
@@ -76,6 +83,29 @@ const app = api(config, (router, models) => {
     await Post.deleteMany({ classify: id })
     ctx.assert(temp.deletedCount === 1, 404, '资源不存在')
     ctx.body = null
+  })
+  router.get('/api/qq', async(ctx) => {
+    const { access_token: accessToken } = ctx.query
+    const url = `https://graph.qq.com/oauth2.0/me?access_token=${accessToken}&unionid=1`
+    const { data } = await axios.get(url)
+    const jsonStr = data.match(/^callback\((.+)\);/)[1]
+    const { openid, unionid } = JSON.parse(jsonStr)
+    const findUser = await User.findOne({ openid })
+    if (findUser) {
+      ctx.session.user = findUser
+    } else {
+      const { data: qqUserDetail } = await axios.get('https://graph.qq.com/user/get_user_info', {
+        params: {
+          access_token: accessToken,
+          openid,
+          oauth_consumer_key: 101844921
+        }
+      })
+      const newUser = new User({ avatar: qqUserDetail.figureurl_qq_1, openid, unionid })
+      await newUser.save()
+      ctx.session.user = newUser
+    }
+    ctx.body = ctx.session.user
   })
 }, { getKoaApp: true })
 

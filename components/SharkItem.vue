@@ -1,10 +1,12 @@
 <template>
-  <el-card :class="className" shadow="hover">
+  <el-card :class="className + ' SharkItem'" shadow="hover">
     <p><img :src="icon" width="32" height="32" alt=""> {{ path }}</p>
-    <p>{{ post.describe }}</p>
+    <p class="describe">
+      {{ post.describe }}
+    </p>
     <p>{{ post.author.nickname }} 分享于 {{ post.createdAt | time }}</p>
     <p>
-      <el-tag v-for="tag in (post.tags || [])" :key="tag">
+      <el-tag v-for="tag in (post.tags || [])" :key="tag" class="mr10">
         {{ tag }}
       </el-tag>
     </p>
@@ -46,3 +48,13 @@ export default {
   }
 }
 </script>
+
+<style lang="less">
+.SharkItem {
+  .describe {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #666;
+  }
+}
+</style>
